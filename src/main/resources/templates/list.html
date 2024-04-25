@@ -15,9 +15,9 @@
     Total : [[${#lists.size(list)}]]
     <div class="productList">
         <div th:each="row:${list}">
-            <img th:if="${row.filename !='-'}" th:src="@{/images/}+${row.filename}">
+            <img th:if="${row.filename !='-'}" th:src="@{/images/__${row.filename}__}">
             <span th:if="${row.filename == '-'}">[image upload]<br></span>
-            <a th:href="@{/detail/}+${row.productCode}">
+            <a th:href="@{/detail/__${row.productCode}__}">
                 name: [[${row.productName}]]<br>
                 price: [[${#numbers.formatInteger(row.price,0,'COMMA')}]]원
             </a>

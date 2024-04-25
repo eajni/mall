@@ -29,7 +29,7 @@
         <tr>
             <td>Image</td>
             <td>
-                <img th:if="${dto.filename != '-'}" th:src="@{/images/}+${dto.filename}">
+                <img th:if="${dto.filename != '-'}" th:src="@{/images/__${dto.filename}__}" >
                 <br>
                 <input type="file" name="file">
             </td>
