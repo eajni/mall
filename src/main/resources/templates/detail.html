@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h2>Product Detail</h2>
+<form name="productForm">
+    <table>
+        <tr>
+            <td>Name</td>
+            <td>
+                <input type="text" name="productName" th:value="${dto.productName}">
+            </td>
+        </tr>
+        <tr>
+            <td>Price</td>
+            <td>
+                <input type="number" name="price" th:value="${dto.price}">
+            </td>
+        </tr>
+        <tr>
+            <td>Description</td>
+            <td>
+                <textarea rows="5" cols="60" name="description">[[${dto.description}]]</textarea>
+            </td>
+        </tr>
+        <tr>
+            <td>Image</td>
+            <td>
+                <img th:if="${dto.filename != '-'}" th:src="@{/images/}+${dto.filename}">
+                <br>
+                <input type="file" name="file">
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" align="center">
+                <input type="hidden" name="productCode" th:value="${dto.productCode}">
+                <input type="button" value="update" onclick="productUpdate()">
+                <input type="button" value="delete" onclick="productDelete()">
+                <input type="button" value="list" onclick="location.href='/'">
+            </td>
+        </tr>
+    </table>
+</form>
+<script>
+    function productUpdate(){
+        document.productForm.action="/update";
+        document.productForm.submit();
+    }
+
+    function productDelete(){
+        if(confirm("삭제하시겠습니까?")){
+            document.productForm.action="/delete";
+            document.productForm.submit();
+        }
+    }
+</script>
+</body>
+</html>

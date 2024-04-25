@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/main.css}">
+</head>
+<body>
+<h2>Product List</h2>
+<form method="post">
+    <input type="text" name="productName" th:value="${productName}">
+    <input type="submit" value="search">
+    <br>
+    <button type="button" onclick="location.href='write'">upload</button>
+    Total : [[${#lists.size(list)}]]
+    <div class="productList">
+        <div th:each="row:${list}">
+            <img th:if="${row.filename !='-'}" th:src="@{/images/}+${row.filename}">
+            <span th:if="${row.filename == '-'}">[image upload]<br></span>
+            <a th:href="@{/detail/}+${row.productCode}">
+                name: [[${row.productName}]]<br>
+                price: [[${#numbers.formatInteger(row.price,0,'COMMA')}]]원
+            </a>
+        </div>
+    </div>
+</form>
+</body>
+</html>

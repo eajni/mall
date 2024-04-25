@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>WRITE</title>
+</head>
+<body>
+    <h2>상품 등록</h2>
+    <form method="post" enctype="multipart/form-data" action="insert">
+        <table>
+            <tr>
+                <td>Name</td>
+                <td>
+                    <input type="text" name="productName">
+                </td>
+            </tr>
+            <tr>
+                <td>Price</td>
+                <td>
+                    <input type="number" name="price">
+                </td>
+            </tr>
+            <tr>
+                <td>Description</td>
+                <td>
+                    <textarea rows="5" cols="60" name="description"></textarea>
+                </td>
+            </tr>
+            <tr>
+                <td>Image</td>
+                <td>
+                    <input type="file" name="file">
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center">
+                    <input type="submit" value="upload">
+                    <input type="button" value="list" onclick="location.href='/'">
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>
