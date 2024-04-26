@@ -3,10 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+
+    <script>
+        function productUpdate(){
+            document.uploadForm.action="/update";
+            document.uploadForm.submit();
+        }
+
+        function productDelete(){
+            if(confirm("삭제하시겠습니까?")){
+                document.uploadForm.action="/delete";
+                document.uploadForm.submit();
+            }
+        }
+    </script>
 </head>
 <body>
-<h2>Product Detail</h2>
-<form name="productForm">
+<p class="is-size-1 has-text-centered">Product List</p>
+<form name="uploadForm" method="post" enctype="multipart/form-data">
     <table>
         <tr>
             <td>Name</td>
@@ -44,18 +58,6 @@
         </tr>
     </table>
 </form>
-<script>
-    function productUpdate(){
-        document.productForm.action="/update";
-        document.productForm.submit();
-    }
 
-    function productDelete(){
-        if(confirm("삭제하시겠습니까?")){
-            document.productForm.action="/delete";
-            document.productForm.submit();
-        }
-    }
-</script>
 </body>
 </html>

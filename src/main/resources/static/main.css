@@ -1,5 +1,8 @@
-.productList{
-    display: grid;
-    grid-template-rows: 1fr;
-    grid-template-columns:1fr 1fr 1fr 1fr 1fr;
+@import "https://cdn.jsdelivr.net/npm/bulma@1.0.0/css/bulma.min.css";
+
+*{
+    margin:0 auto;
+}
+a{
+    text-decoration: none;
 }

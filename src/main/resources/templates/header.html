@@ -1,0 +1,30 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+    <div th:fragment="header">
+        <header class="header">
+            <nav class="level mt-5">
+                <div class="level-left">
+                    <div class="level-item">
+                        <a href="@{/}" class="has-text-success has-text-weight-bold">HOME</a>
+                    </div>
+                    <div class="level-item">
+                        <div class="field has-addons">
+                            <p class="control">
+                                <input type="text" name="productName" th:value="${productName}" class="search input is-primary ">
+                            </p>
+                            <p class="control">
+                                <input type="submit" value="search" class="button is-success">
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="level-right">
+                    <div class="level-item">
+                        <button type=button class="button is-success" onclick="location.href='write'">upload</button>
+                    </div>
+                </div>
+            </nav>
+        </header>
+    </div>
+</body>
+</html>

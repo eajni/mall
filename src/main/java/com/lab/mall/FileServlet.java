@@ -21,5 +21,6 @@ public class FileServlet extends HttpServlet {
         resp.setHeader("Content-length", String.valueOf(file.length()));
         resp.setHeader("Content-Disposition", "inline; filename=\"" + file.getName() + "\"");
         Files.copy(file.toPath(), resp.getOutputStream());
+
     }
 }

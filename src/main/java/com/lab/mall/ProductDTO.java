@@ -1,8 +1,10 @@
 package com.lab.mall;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.web.ErrorResponse;
 import org.springframework.web.multipart.MultipartFile;
 
 @Getter
@@ -15,7 +17,7 @@ public class ProductDTO {
     private int price;
     private String description;
     private String filename;
-    private MultipartFile multipartFile;
+    private MultipartFile fi1e;
 
 
 }

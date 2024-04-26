@@ -1,6 +1,7 @@
 package com.lab.mall;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -22,5 +23,14 @@ public class Product {
 
     public Product(long productCode){
         this.productCode = productCode;
+    }
+
+    @Builder
+    public Product(long productCode, String productName, int price, String description, String filename) {
+        this.productCode = productCode;
+        this.productName = productName;
+        this.price = price;
+        this.description = description;
+        this.filename = filename;
     }
 }

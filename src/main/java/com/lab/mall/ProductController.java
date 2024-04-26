@@ -1,7 +1,6 @@
 package com.lab.mall;
 
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -12,14 +11,18 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Optional;
 
+
 @Controller
 public class ProductController {
-    @Autowired
-    ProductRepository productRepository;
-    @Autowired
-    ModelMapper modelMapper;
+    final ProductRepository productRepository;
+    final ModelMapper modelMapper;
 
-    String uploadPath="c:/workspace_spring/mall/src/main/resources/static/images";
+    String uploadPath="c:/workspace_spring/mall/src/main/resources/static/images/";
+
+    public ProductController(ModelMapper modelMapper, ProductRepository productRepository) {
+        this.modelMapper = modelMapper;
+        this.productRepository = productRepository;
+    }
 
     @GetMapping("write")
     public String write(){
@@ -27,19 +30,27 @@ public class ProductController {
     }
 
     @PostMapping("insert")
-    public String insert(ProductDTO dto, @RequestParam MultipartFile file) {
+    public String insert(ProductDTO dto , @RequestParam MultipartFile fi1e) {
         String filename = "-";
-        if (file != null && !file.isEmpty()) {
-            filename = file.getOriginalFilename();
+
+        if (fi1e != null && !fi1e.isEmpty()) {
+            filename = fi1e.getOriginalFilename();
+
             try {
                 new File(uploadPath).mkdir();
-                dto.getMultipartFile().transferTo(new File(uploadPath + filename));
+                dto.getFi1e().transferTo(new File(uploadPath + filename));
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
         dto.setFilename(filename);
-        Product product = modelMapper.map(dto, Product.class);
+
+        Product product = Product.builder().productCode(dto.getProductCode())
+                .productName(dto.getProductName())
+                .price(dto.getPrice())
+                .description(dto.getDescription())
+                .filename(dto.getFilename())
+                .build();
         productRepository.save(product);
         return "redirect:/";
     }
@@ -58,13 +69,13 @@ public class ProductController {
     }
 
     @PostMapping("update")
-    public String update(ProductDTO dto, @RequestParam MultipartFile file) {
+    public String update(ProductDTO dto, @RequestParam MultipartFile fi1e) {
         String filename = "-";
-        if (file != null && !file.isEmpty()) {
-            filename = file.getOriginalFilename();
+        if (fi1e != null && !fi1e.isEmpty()) {
+            filename = fi1e.getOriginalFilename();
             try{
                 new File(uploadPath).mkdir();
-                file.transferTo(new File(uploadPath+filename));
+                fi1e.transferTo(new File(uploadPath+filename));
                 dto.setFilename(filename);
             }catch (IOException e){
                 e.printStackTrace();
@@ -84,7 +95,6 @@ public class ProductController {
         Optional<Product> optionalProduct = productRepository.findById(productCode);
         Product dto = optionalProduct.get();
         String filename = dto.getFilename();
-
         if(filename != null && !filename.equals("-")){
             File file = new File(uploadPath+filename);
             if(file.exists()){

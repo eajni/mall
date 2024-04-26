@@ -2,27 +2,59 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="stylesheet" th:href="@{/css/main.css}">
+    <title>Mall Lab</title>
+    <link rel="stylesheet" th:href="@{/main.css}">
 </head>
 <body>
-<h2>Product List</h2>
+
 <form method="post">
-    <input type="text" name="productName" th:value="${productName}">
-    <input type="submit" value="search">
-    <br>
-    <button type="button" onclick="location.href='write'">upload</button>
-    Total : [[${#lists.size(list)}]]
-    <div class="productList">
-        <div th:each="row:${list}">
-            <img th:if="${row.filename !='-'}" th:src="@{/images/__${row.filename}__}">
-            <span th:if="${row.filename == '-'}">[image upload]<br></span>
-            <a th:href="@{/detail/__${row.productCode}__}">
-                name: [[${row.productName}]]<br>
-                price: [[${#numbers.formatInteger(row.price,0,'COMMA')}]]원
-            </a>
+    <nav class="level mt-5">
+        <div class="level-left">
+            <div class="level-item">
+                <a href="@{/}" class="has-text-success has-text-weight-bold">HOME</a>
+            </div>
+            <div class="level-item">
+                <div class="field has-addons">
+                    <p class="control">
+                        <input type="text" name="productName" th:value="${productName}" class="search input is-primary ">
+                    </p>
+                    <p class="control">
+                        <input type="submit" value="search" class="button is-success">
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="level-right">
+            <div class="level-item">
+                <button type=button class="button is-success" onclick="location.href='write'">upload</button>
+            </div>
+        </div>
+    </nav>
+
+
+    <p class="is-size-1 has-text-centered">Product List</p>
+    <p class="is-size-5 has-text-centered mb-3">Total [[${#lists.size(list)}]]</p>
+    <div class="grid">
+        <div th:each="row:${list}" class="cell is-col-min-5">
+        <div class="card">
+            <div class="card-image">
+                <figure class="image">
+                    <img th:if="${row.filename !='-'}" th:src="@{/images/__${row.filename}__}"/>
+<!--                         <span th:if="${row.filename == '-'}">[image upload]<br></span>-->
+                </figure>
+            </div>
+            <div class="card-content">
+                <div class="content">
+                    <a th:href="@{/detail/__${row.productCode}__}">
+                        name: [[${row.productName}]]<br>
+                        price: [[${#numbers.formatInteger(row.price,0,'COMMA')}]]원
+                    </a>
+                </div>
+            </div>
         </div>
     </div>
+    </div>
 </form>
+
 </body>
 </html>
